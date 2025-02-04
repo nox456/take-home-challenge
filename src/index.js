@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "./middlewares/morgan.js";
 import job from "./cron/job.js";
+import { HOST, PORT } from "./config/env.js";
 
 // Initialize app
 const app = express();
@@ -12,9 +13,9 @@ app.use(express.json());
 // Routes
 
 // Start Server
-app.listen(4000, () => {
+app.listen(PORT, HOST, () => {
     console.clear();
-    console.log(`Server running at http://${"localhost"}:${4000}`);
+    console.log(`Server running at http://${HOST}:${PORT}`);
     job.start();
     console.log(`Cron job running`);
 });

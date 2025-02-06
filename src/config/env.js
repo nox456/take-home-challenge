@@ -5,7 +5,8 @@ const {
     DB_HOST,
     DB_PORT,
     DB_USER,
-    DB_PASSWORD
+    DB_PASSWORD,
+    JOB_TIME
 } = process.env
 
 if (!HOST) {
@@ -29,6 +30,9 @@ if (!DB_USER) {
 if (!DB_PASSWORD) {
     throw new Error("ERROR: Missing environment var! -> $DB_PASSWORD")
 }
+if (!JOB_TIME) {
+    throw new Error("ERROR: Missing environment var! -> $JOB_TIME")
+}
 
 export {
     HOST,
@@ -37,5 +41,6 @@ export {
     DB_PORT,
     DB_NAME,
     DB_USER,
-    DB_PASSWORD
+    DB_PASSWORD,
+    JOB_TIME
 }

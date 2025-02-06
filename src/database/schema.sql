@@ -1,5 +1,5 @@
-CREATE IF NOT EXISTS TABLE rates (
+CREATE TABLE IF NOT EXISTS rates (
     id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
     price REAL NOT NULL,
-    date DATE NOT NULL
+    date DATE UNIQUE NOT NULL
 )

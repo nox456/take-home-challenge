@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import pg from "pg";
 import {
     DB_PASSWORD,
     DB_USER,
@@ -7,7 +7,7 @@ import {
     DB_HOST
 } from "../config/env.js";
 
-const db = new Pool({
+const db = new pg.Pool({
     database: DB_NAME,
     host: DB_HOST,
     port: DB_PORT,

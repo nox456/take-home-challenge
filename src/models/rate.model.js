@@ -8,14 +8,14 @@ export default class Rate {
         const page = await browser.newPage();
         await page.goto(BCV_URL);
         const element = await page.$(DOLLAR_ELEMENT_SELECTOR);
-        const rate = await element.evaluate((el) => {
+        const price = await element.evaluate((el) => {
             return parseFloat(el.innerText.replace(",", ".")).toFixed(2);
         });
         await browser.close();
-        const date = new Date();
+        const date = new Date().toJSON().slice(0, 10);
         return {
-            price: rate,
-            date: date.toJSON().slice(0, 10),
+            price,
+            date,
         };
     }
     static async save(rate) {
@@ -42,11 +42,13 @@ export default class Rate {
         const rateQuery = await db.query(
             "SELECT price, date FROM rates ORDER BY date DESC LIMIT 1",
         );
-        const rate = rateQuery.rows[0];
-        return {
-            price: rate.price,
-            date: new Date(rate.date).toJSON().slice(0, 10),
-        };
+        if (rateQuery.rowCount > 0) {
+            const rate = rateQuery.rows[0];
+            return {
+                price: rate.price,
+                date: new Date(rate.date).toJSON().slice(0, 10),
+            };
+        } else return null;
     }
     static async getHistory(startDate, endDate) {
         let ratesQuery;
@@ -76,5 +78,8 @@ export default class Rate {
                 date: new Date(rate.date).toJSON().slice(0, 10),
             };
         });
+    }
+    static validateDate(date) {
+        return !isNaN(new Date(date));
     }
 }

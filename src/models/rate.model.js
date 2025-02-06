@@ -45,7 +45,7 @@ export default class Rate {
         if (rateQuery.rowCount > 0) {
             const rate = rateQuery.rows[0];
             return {
-                price: rate.price,
+                rate: rate.price,
                 date: new Date(rate.date).toJSON().slice(0, 10),
             };
         } else return null;
@@ -74,7 +74,7 @@ export default class Rate {
         }
         return ratesQuery.rows.map((rate) => {
             return {
-                price: rate.price,
+                rate: rate.price,
                 date: new Date(rate.date).toJSON().slice(0, 10),
             };
         });

@@ -5,7 +5,7 @@ import { JOB_TIME } from "../config/env.js";
 export default CronJob.from({
     cronTime: JOB_TIME,
     onTick: async () => {
-        console.log("Scrapping data...")
+        console.log("Scraping data...")
         try {
             const rate = await Rate.scrape()
             const isSaved = await Rate.save(rate)

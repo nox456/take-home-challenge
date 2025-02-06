@@ -11,6 +11,14 @@ export default class Rate {
             return parseFloat(el.innerText.replace(",", ".")).toFixed(2)
         })
         await browser.close()
-        return rate
+        const date = new Date()
+        const year = date.getFullYear()
+        const month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()
+        const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate()
+
+        return {
+            price: rate,
+            date: `${year}-${month}-${day}`
+        }
     }
 }

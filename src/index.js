@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "./middlewares/morgan.js";
 import job from "./cron/job.js";
 import { HOST, PORT } from "./config/env.js";
+import routes from "./routes/index.routes.js"
 
 // Initialize app
 const app = express();
@@ -11,6 +12,7 @@ app.use(morgan);
 app.use(express.json());
 
 // Routes
+app.use("/api", routes)
 
 // Start Server
 app.listen(PORT, HOST, () => {

@@ -13,12 +13,9 @@ export default class Rate {
         })
         await browser.close()
         const date = new Date()
-        const year = date.getFullYear()
-        const month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1
-        const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate()
         return {
             price: rate,
-            date: `${year}-${month}-${day}`
+            date: date.toJSON().slice(0,10)
         }
     }
     static async save(rate) {
@@ -30,6 +27,14 @@ export default class Rate {
         } else {
             await db.query("INSERT INTO rates VALUES (DEFAULT, $1, $2)", [rate.price, rate.date])
             return true;
+        }
+    }
+    static async getCurrent() {
+        const rateQuery = await db.query("SELECT price, date FROM rates ORDER BY date DESC LIMIT 1")
+        const rate = rateQuery.rows[0]
+        return {
+            price: rate.price,
+            date: new Date(rate.date).toJSON().slice(0,10)
         }
     }
 }

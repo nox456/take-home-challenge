@@ -1,8 +1,10 @@
 import RateController from "../controllers/rates.controllers.js";
 import { Router } from "express";
 
-const router = Router()
+const router = Router();
 
-router.get("/current", RateController.getCurrent)
+router.get("/current", RateController.getCurrent);
 
-export default router
+router.get("/history", RateController.getHistory);
+
+export default router;

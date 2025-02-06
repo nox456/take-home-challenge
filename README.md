@@ -34,6 +34,24 @@ postgres=# \c {database_name}
 {database_name}=# \i src/database/schema.sql
 ```
 
+### Environment variables
+Create a **.env** file using the **.env.example** file
+```
+# Server
+HOST=""
+PORT=""
+
+# Database
+DB_NAME=""
+DB_HOST=""
+DB_PORT=""
+DB_USER=""
+DB_PASSWORD=""
+
+# Cron job
+JOB_TIME=""
+```
+
 ### Installing dependencies
 ```
 $ npm install
